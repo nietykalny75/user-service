@@ -1,36 +1,7 @@
-eureka:
-  instance:
-    prefer-ip-address: true
-    hostname: eureka-discovery-service
-  client:
-    eureka-server-port: 8081
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${eureka.client.eureka-server-port}/eureka
-
-management:
-  endpoints:
-    jmx:
-      exposure:
-        include: "health,info"
-    web:
-      exposure:
-        include: "health,info"
-  endpoint:
-    health:
-      show-details: never
-
-server:
-  error:
-    include-binding-errors: never
-    include-message: never
-    include-stacktrace: never
-    include-exception: false
-    whitelabel:
-      enabled: true
-  port: 8082
-
 spring:
-  main:
-    banner-mode: off
   application:
     name: user-service
+  config:
+    import: optional:configserver:http://config-service:8888
+  main:
+    banner-mode: off
